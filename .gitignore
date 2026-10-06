@@ -1,0 +1,11 @@
+node_modules/
+coverage/
+.opengen/
+.env
+.env.*
+!.env.example
+*.log
+*.tgz
+artifacts/
+.DS_Store
+Thumbs.db

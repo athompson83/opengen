@@ -1,0 +1,13 @@
+OpenGen
+Copyright 2026 OpenGen contributors
+
+Licensed under the Apache License, Version 2.0.
+
+OpenGen is an independent runtime. Its source does not include proprietary
+Genisys application code. References to Docker, Node.js, GitHub, and other
+projects identify interoperability or external dependencies; they do not imply
+endorsement, ownership of those projects, or relicensing of their components.
+
+The example container image builds on the official Node.js image and includes
+third-party software with its own licenses. See docs/THIRD_PARTY.md. This NOTICE
+does not replace those licenses or modify the Apache License.

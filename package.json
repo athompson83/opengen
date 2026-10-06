@@ -1,0 +1,25 @@
+{
+  "name": "@opengen/sandbox",
+  "version": "0.1.0",
+  "description": "An independently usable local sandbox runtime for agent applications.",
+  "license": "Apache-2.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24.0.0 <25" },
+  "bin": { "opengen": "bin/opengen.mjs" },
+  "exports": {
+    ".": { "types": "./src/client.d.ts", "import": "./src/client.mjs" },
+    "./runtime": "./src/docker-runtime.mjs",
+    "./server": "./src/server.mjs"
+  },
+  "files": ["src", "bin", "images", "scripts/build-images.mjs", "README.md", "ARCHITECTURE.md", "SECURITY.md", "LICENSE", "NOTICE", "docs", "examples"],
+  "scripts": {
+    "start": "node bin/opengen.mjs serve",
+    "doctor": "node bin/opengen.mjs doctor",
+    "images:build": "node scripts/build-images.mjs",
+    "test": "node --test test/*.test.mjs",
+    "test:docker": "node scripts/test-docker.mjs",
+    "check": "node scripts/check.mjs"
+  },
+  "repository": { "type": "git", "url": "https://github.com/athompson83/opengen.git" }
+}
