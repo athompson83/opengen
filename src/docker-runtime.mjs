@@ -29,6 +29,7 @@ const MAX = 1048576;
   let temporary;
   try {
     let raw = '';
+    process.stdin.setEncoding('utf8');
     for await (const chunk of process.stdin) {
       raw += chunk;
       if (Buffer.byteLength(raw) > 1500000) throw { code: 'FILE_TOO_LARGE' };

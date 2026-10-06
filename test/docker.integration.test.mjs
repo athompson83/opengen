@@ -226,8 +226,9 @@ test('real Docker: public API, container boundaries, persistence, and previews',
     assert.equal(decode(await client.readFile(alpha.id, { ...scopeA, path: 'nested/value.txt' })), 'alpha value\n');
     assert.equal(decode(await client.readFile(beta.id, { ...scopeB, path: 'nested/value.txt' })), 'beta value\n');
     const binary = Buffer.alloc(1024 * 1024, 0xa5);
-    await client.writeFile(alpha.id, { ...scopeA, path: 'one-mib.bin', content: binary.toString('base64'), encoding: 'base64' });
-    const roundTrip = await client.readFile(alpha.id, { ...scopeA, path: 'one-mib.bin' });
+    const binaryPath = 'nested/多言語-😀.bin';
+    await client.writeFile(alpha.id, { ...scopeA, path: binaryPath, content: binary.toString('base64'), encoding: 'base64' });
+    const roundTrip = await client.readFile(alpha.id, { ...scopeA, path: binaryPath });
     assert.equal(roundTrip.encoding, 'base64');
     assert.deepEqual(Buffer.from(roundTrip.content, 'base64'), binary);
     await assert.rejects(client.writeFile(alpha.id, {
