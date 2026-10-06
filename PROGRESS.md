@@ -13,14 +13,14 @@ resource controls, project scope, local previews, state recovery, and shutdown
 draining are implemented. Consumer billing, connected accounts, model inference,
 and proprietary application code remain outside this repository.
 
-### Verification before publication
+### Verification
 
 - `npm run check`: 22 JavaScript modules pass syntax checks; 40 tests pass.
 - An actual CLI process initialized state, served authenticated health, reported
   missing Docker accurately, and exited cleanly on SIGTERM with its lock released
   and its credential absent from output.
-- One real Docker integration test is explicitly skipped in a workspace without
-  a Docker daemon. This is not Docker verification.
+- Local source checks explicitly skip the real Docker integration test when no
+  daemon is present. The real-container evidence comes from CI below.
 - The public file review found no private application source, credentials, or
   production configuration in the proposed repository contents.
 - A separate code review exercised the HTTP credential boundary and shutdown
@@ -28,9 +28,21 @@ and proprietary application code remain outside this repository.
   injection, and Docker endpoint pinning were corrected with regression coverage.
 - The original `LICENSE` has no diff.
 
-The GitHub Actions workflow must establish actual Docker behavior for the source
-commit. It builds the workload image and runs the public API/SDK integration suite
-against a local Linux Docker daemon, including proxy-setting isolation.
+The [GitHub Actions run](https://github.com/athompson83/opengen/actions/runs/37482496077)
+for source commit
+[`22de01c48f887cc8623a1f25982480c70b5c6ff2`](https://github.com/athompson83/opengen/commit/22de01c48f887cc8623a1f25982480c70b5c6ff2)
+completed successfully on Ubuntu 24.04 with Node.js 24.21.0. It built the workload
+image, passed all 40 source tests, and passed all 8 reported Docker tests (seven
+integration scenarios plus the enclosing test), with zero Docker failures or
+skips. The implementation and verification files in this documentation update
+are identical to that verified source commit.
+
+The real Docker suite verifies actual container identity and configuration,
+proxy-setting isolation, 1 MiB binary transfer with a nested Unicode/emoji
+filename, unsafe file rejection, project separation, persistent workspaces,
+runtime restart, timeout cleanup of detached child processes, loopback previews,
+and explicit owned-resource deletion. A separate deterministic stream check
+confirmed that partial multibyte input is decoded without corrupting filenames.
 
 ### Scope that remains separate
 
