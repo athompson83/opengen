@@ -1,5 +1,15 @@
 # Progress
 
+## 2026-10-07 — Developer-portal discovery
+
+The README and client-integration guide now link the live
+[Genisys OpenGen setup page](https://genisys.aroqon.com/developers/opengen/).
+They distinguish the free independent runtime from Genisys's paid Local Mode
+and explain that the native console is distributed with the Genisys application.
+This documentation update does not change runtime, image, protocol or tests;
+the verified standalone implementation below remains the same. No private
+application source or release history is included here.
+
 ## 2026-10-06 — Initial standalone source baseline
 
 OpenGen provides a local Docker runtime, CLI, authenticated loopback HTTP API,

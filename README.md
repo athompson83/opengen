@@ -67,9 +67,11 @@ rejected.
 - [Client application integration](docs/INTEGRATION.md)
 - [Architecture](ARCHITECTURE.md)
 
-**Genisys integration is not included in this release.** Genisys or another
-application can consume these public interfaces independently; no proprietary
-application source or paid service is required by OpenGen.
+Genisys users can follow the [OpenGen developer guide](https://genisys.aroqon.com/developers/opengen/)
+for setup and the separate developer-console connection. The console is delivered
+with Genisys; this repository does not install or upgrade that application.
+**OpenGen stays free and independent. Genisys Local Mode is a separate paid app
+offering.** No proprietary application source or paid service is required by OpenGen.
 
 ## Verify
 

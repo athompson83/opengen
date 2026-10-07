@@ -5,8 +5,12 @@ including Genisys, can consume the same public interface. No application-specifi
 account, billing module, model-provider key, or proprietary source is required by
 the runtime.
 
-**This release does not modify or wire OpenGen into an installed Genisys build.**
-The JavaScript client and HTTP contract are the integration deliverables here.
+For Genisys setup and its separate native console connection, see the public
+[OpenGen developer guide](https://genisys.aroqon.com/developers/opengen/).
+OpenGen does not install or upgrade Genisys; the console is distributed with that
+application. Genisys Local Mode remains a paid app offering, while this runtime
+can be used independently without a subscription. The JavaScript client and HTTP
+contract remain the integration deliverables in this repository.
 
 ## JavaScript example
 
