@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="228" viewBox="0 0 940 228" role="img" aria-label="Preview a dev server on loopback: a recorded OpenGen terminal session">
+<title>Preview a dev server on loopback</title>
+<style>
+text{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:13.5px;white-space:pre}
+.cmd{fill:#e6edf3}.ps{fill:#3fb950;font-weight:700}.out{fill:#8b949e}.bar{fill:#8b949e;font-family:-apple-system,"Segoe UI",sans-serif;font-size:12.5px}
+@keyframes r0{0%,3.57%{opacity:0}3.58%,100%{opacity:1}}.r0{animation:r0 16.81s linear infinite}
+@keyframes t0{0%,3.57%{transform:scaleX(0)}16.66%,100%{transform:scaleX(1)}}.t0{transform-box:fill-box;transform-origin:left;animation:t0 16.81s linear infinite}
+@keyframes r1{0%,24.09%{opacity:0}24.10%,100%{opacity:1}}.r1{animation:r1 16.81s linear infinite}
+@keyframes t1{0%,24.09%{transform:scaleX(0)}30.64%,100%{transform:scaleX(1)}}.t1{transform-box:fill-box;transform-origin:left;animation:t1 16.81s linear infinite}
+@keyframes r2{0%,30.64%{opacity:0}30.65%,100%{opacity:1}}.r2{animation:r2 16.81s linear infinite}
+@keyframes t2{0%,30.64%{transform:scaleX(0)}37.18%,100%{transform:scaleX(1)}}.t2{transform-box:fill-box;transform-origin:left;animation:t2 16.81s linear infinite}
+@keyframes r3{0%,39.26%{opacity:0}39.27%,100%{opacity:1}}.r3{animation:r3 16.81s linear infinite}
+@keyframes r4{0%,44.62%{opacity:0}44.63%,100%{opacity:1}}.r4{animation:r4 16.81s linear infinite}
+@keyframes t4{0%,44.62%{transform:scaleX(0)}57.70%,100%{transform:scaleX(1)}}.t4{transform-box:fill-box;transform-origin:left;animation:t4 16.81s linear infinite}
+@keyframes r5{0%,59.79%{opacity:0}59.80%,100%{opacity:1}}.r5{animation:r5 16.81s linear infinite}
+@keyframes r6{0%,65.14%{opacity:0}65.15%,100%{opacity:1}}.r6{animation:r6 16.81s linear infinite}
+@keyframes t6{0%,65.14%{transform:scaleX(0)}71.74%,100%{transform:scaleX(1)}}.t6{transform-box:fill-box;transform-origin:left;animation:t6 16.81s linear infinite}
+@keyframes r7{0%,73.83%{opacity:0}73.84%,100%{opacity:1}}.r7{animation:r7 16.81s linear infinite}
+@media (prefers-reduced-motion: reduce){g,rect{animation:none!important;opacity:1!important;transform:none!important}}
+</style>
+<rect width="940" height="228" rx="10" fill="#0d1117"/>
+<rect width="940" height="32" rx="10" fill="#161b22"/><rect y="22" width="940" height="10" fill="#161b22"/>
+<circle cx="20" cy="16" r="6" fill="#ff5f57"/><circle cx="40" cy="16" r="6" fill="#febc2e"/><circle cx="60" cy="16" r="6" fill="#28c840"/>
+<text x="470" y="20" text-anchor="middle" class="bar">Preview a dev server on loopback</text>
+<g class="r0"><clipPath id="c0"><rect class="t0" x="18" y="47" width="554.8" height="20"/></clipPath><text x="18" y="62" class="cmd" clip-path="url(#c0)"><tspan class="ps">$</tspan> ID=$(opengen create site --network bridge --port 3000 | jq -r .id)</text></g>
+<g class="r1"><clipPath id="c1"><rect class="t1" x="18" y="67" width="903.0999999999999" height="20"/></clipPath><text x="18" y="82" class="cmd" clip-path="url(#c1)"><tspan class="ps">$</tspan> opengen exec $ID --project site -- sh -c "nohup node -e \"require('http').createServer((q, s) =&gt; s.end('hello</text></g>
+<g class="r2"><clipPath id="c2"><rect class="t2" x="18" y="87" width="619.6" height="20"/></clipPath><text x="18" y="102" class="cmd" clip-path="url(#c2)">  from the sandbox')).listen(3000)\" &gt;/dev/null 2&gt;&amp;1 &amp;" | jq -c '{exitCode}'</text></g>
+<g class="r3"><text x="18" y="122" class="out">{"exitCode":0}</text></g>
+<g class="r4"><clipPath id="c4"><rect class="t4" x="18" y="127" width="627.6999999999999" height="20"/></clipPath><text x="18" y="142" class="cmd" clip-path="url(#c4)"><tspan class="ps">$</tspan> URL=$(opengen status $ID --project site | jq -r '.ports[0].url'); echo $URL</text></g>
+<g class="r5"><text x="18" y="162" class="out">http://127.0.0.1:32770</text></g>
+<g class="r6"><clipPath id="c6"><rect class="t6" x="18" y="167" width="238.89999999999998" height="20"/></clipPath><text x="18" y="182" class="cmd" clip-path="url(#c6)"><tspan class="ps">$</tspan> sleep 1; curl -s $URL; echo</text></g>
+<g class="r7"><text x="18" y="202" class="out">hello from the sandbox</text></g>
+</svg>

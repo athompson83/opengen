@@ -1,32 +1,121 @@
-# OpenGen
+<h1 align="center">OpenGen</h1>
 
-**An independently usable, open-source execution runtime for AI applications.**
+<p align="center">
+  <img src="https://img.shields.io/badge/license-Apache--2.0-08C?style=flat" alt="License: Apache-2.0" />
+  <img src="https://img.shields.io/badge/node-24-08C?style=flat" alt="Node.js 24" />
+  <img src="https://img.shields.io/badge/runtime-Docker-08C?style=flat" alt="Runtime: local Docker" />
+  <img src="https://img.shields.io/badge/no%20account%20%C2%B7%20no%20API%20key-4493F8?style=flat-square" alt="No account or API key required" />
+</p>
 
-OpenGen runs commands and manages project files inside local Docker containers.
-It provides a command-line interface, an authenticated loopback HTTP API, and a
-small JavaScript client. Local use does not require a Genisys account, a paid
-subscription, or an AI provider key.
+<p align="center">
+  <strong>Local sandboxes for AI agents and the apps that run them.</strong><br/>
+  Run commands and keep project files in locked-down Docker containers, from a CLI, a loopback HTTP API or a small JavaScript client.
+</p>
 
-The initial release is a **single-owner local developer runtime**. It is not an
-audited security product, a microVM runtime, or a shared hosted execution service.
-Read [SECURITY.md](SECURITY.md) before running untrusted workloads.
+<p align="center">
+  <img src="docs/assets/readme/quick-start.svg" alt="Recorded terminal: opengen doctor reports Docker ready, a sandbox is created with no network and resource limits, and node -p process.version prints v24 inside it" width="900" />
+</p>
 
-## What is included
+OpenGen is an independently usable, open-source execution runtime. Local use does not require a Genisys
+account, a paid subscription or an AI provider key. The initial release is a **single-owner local developer
+runtime**: it is not an audited security product, a microVM runtime or a shared hosted service. Read
+[SECURITY.md](SECURITY.md) before running untrusted workloads.
 
-- A Node.js execution profile with CPU, memory, and process limits.
-- Non-root containers with a read-only root filesystem and a managed workspace.
-- Network access disabled by default; operator-enabled bridge networking is optional.
-- Workspace files that survive stop/start and container reset.
-- Bounded command execution; a timed-out command stops its sandbox.
-- Loopback-only preview ports when networking is explicitly enabled.
-- Project-scoped lifecycle and file operations through the public API.
-- A Docker integration suite in addition to source-level tests.
+Every recording below is a real session against a local Docker daemon, captured by
+[`npm run readme:record`](scripts/record-readme.mjs); nothing in them is typed by hand.
 
-OpenGen does not include an AI model, hosted compute, a browser automation engine,
-a graphical terminal, or remote-device connectivity. A client application can
-build those experiences on the runtime. The initial backend calls Docker
-directly. OpenSandbox and microVM backends are future candidates, not implemented
-adapters.
+## Features
+
+<table>
+<tr>
+<td width="42%" valign="middle">
+
+### Locked down by default
+
+Containers run as a non-root user on a read-only root filesystem, with CPU, memory and process limits, and no network unless the operator allows it.
+
+[Security →](SECURITY.md#controls-implemented-by-the-docker-adapter)
+
+</td>
+<td width="58%">
+  <img src="docs/assets/readme/secure-defaults.svg" alt="Recorded terminal: id -u prints 1000, touch /etc/x fails with Read-only file system, and a fetch to example.com fails offline" width="100%" />
+</td>
+</tr>
+<tr>
+<td width="42%" valign="middle">
+
+### Files that stay put
+
+The managed workspace survives stop, start and reset. Reset recreates the container, not your files; deletion is a separate, explicit step.
+
+[Docs →](docs/LOCAL.md#create-run-and-inspect)
+
+</td>
+<td width="58%">
+  <img src="docs/assets/readme/persistent-workspace.svg" alt="Recorded terminal: a file written in the sandbox is still readable after stop and reset" width="100%" />
+</td>
+</tr>
+<tr>
+<td width="42%" valign="middle">
+
+### Every command has a deadline
+
+A command that runs past its timeout is stopped along with its sandbox, so a runaway process cannot keep running. Start it again when you are ready.
+
+[Docs →](docs/API.md#execute)
+
+</td>
+<td width="58%">
+  <img src="docs/assets/readme/bounded-commands.svg" alt="Recorded terminal: sleep 600 with a two-second timeout returns exit code 124 and timedOut true, the sandbox is stopped, then started again" width="100%" />
+</td>
+</tr>
+<tr>
+<td width="42%" valign="middle">
+
+### Local previews
+
+Allow networking for a sandbox, start a dev server inside it, and open it on a loopback-only URL on your machine.
+
+[Docs →](docs/LOCAL.md#local-application-previews)
+
+</td>
+<td width="58%">
+  <img src="docs/assets/readme/local-previews.svg" alt="Recorded terminal: a sandbox with port 3000 serves hello from the sandbox at a 127.0.0.1 preview URL" width="100%" />
+</td>
+</tr>
+<tr>
+<td width="42%" valign="middle">
+
+### Drive it from your own app
+
+A small JavaScript client with TypeScript declarations covers create, write, run, stop, reset and delete, from a trusted backend process.
+
+[Docs →](docs/INTEGRATION.md#javascript-example)
+
+</td>
+<td width="58%">
+  <img src="docs/assets/readme/js-client.svg" alt="Recorded terminal: the bundled example creates a sandbox, writes hello.mjs, runs it and prints Hello from OpenGen" width="100%" />
+</td>
+</tr>
+<tr>
+<td width="42%" valign="middle">
+
+### An API that stays on your machine
+
+The HTTP API listens on 127.0.0.1 only, needs the owner token on every call, and refuses requests that come from a web page.
+
+[API →](docs/API.md)
+
+</td>
+<td width="58%">
+  <img src="docs/assets/readme/http-api.svg" alt="Recorded terminal: health with the token is ready, without it UNAUTHORIZED, and with a browser Origin header ORIGIN_REJECTED" width="100%" />
+</td>
+</tr>
+</table>
+
+OpenGen does not include an AI model, hosted compute, a browser automation engine, a graphical terminal or
+remote-device connectivity; a client application builds those on the runtime. The backend calls Docker directly.
+OpenSandbox and microVM backends are future candidates, not implemented adapters.
 
 ## Run from source
 
@@ -81,11 +170,14 @@ npm run images:build
 npm run test:docker
 ```
 
-`check` verifies source behavior without a Docker daemon. `test:docker` requires a
+`check` verifies source behavior without a Docker daemon (including that every image this README shows exists). `test:docker` requires a
 real local Linux Docker daemon and the built image; it exercises container
 configuration, lifecycle, file persistence, timeouts, project boundaries, and
 preview binding. See [verification](docs/VERIFICATION.md) for what the evidence
 does and does not establish.
+
+After a change to the CLI, API or image, re-record the feature demos with `npm run readme:record` (it needs Docker,
+bash, curl and jq, uses a private state directory, and deletes its sandboxes) and commit the updated SVGs.
 
 CI runs one bounded Ubuntu job on relevant code changes. It does not run paid
 models, publish images, or deploy infrastructure. Native Windows and macOS

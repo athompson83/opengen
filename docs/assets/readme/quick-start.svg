@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="208" viewBox="0 0 940 208" role="img" aria-label="Create a sandbox and run a command: a recorded OpenGen terminal session">
+<title>Create a sandbox and run a command</title>
+<style>
+text{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:13.5px;white-space:pre}
+.cmd{fill:#e6edf3}.ps{fill:#3fb950;font-weight:700}.out{fill:#8b949e}.bar{fill:#8b949e;font-family:-apple-system,"Segoe UI",sans-serif;font-size:12.5px}
+@keyframes r0{0%,3.51%{opacity:0}3.52%,100%{opacity:1}}.r0{animation:r0 17.11s linear infinite}
+@keyframes t0{0%,3.51%{transform:scaleX(0)}16.36%,100%{transform:scaleX(1)}}.t0{transform-box:fill-box;transform-origin:left;animation:t0 17.11s linear infinite}
+@keyframes r1{0%,18.41%{opacity:0}18.42%,100%{opacity:1}}.r1{animation:r1 17.11s linear infinite}
+@keyframes r2{0%,23.67%{opacity:0}23.68%,100%{opacity:1}}.r2{animation:r2 17.11s linear infinite}
+@keyframes t2{0%,23.67%{transform:scaleX(0)}31.91%,100%{transform:scaleX(1)}}.t2{transform-box:fill-box;transform-origin:left;animation:t2 17.11s linear infinite}
+@keyframes r3{0%,39.22%{opacity:0}39.23%,100%{opacity:1}}.r3{animation:r3 17.11s linear infinite}
+@keyframes t3{0%,39.22%{transform:scaleX(0)}52.07%,100%{transform:scaleX(1)}}.t3{transform-box:fill-box;transform-origin:left;animation:t3 17.11s linear infinite}
+@keyframes r4{0%,54.12%{opacity:0}54.13%,100%{opacity:1}}.r4{animation:r4 17.11s linear infinite}
+@keyframes r5{0%,59.38%{opacity:0}59.39%,100%{opacity:1}}.r5{animation:r5 17.11s linear infinite}
+@keyframes t5{0%,59.38%{transform:scaleX(0)}72.24%,100%{transform:scaleX(1)}}.t5{transform-box:fill-box;transform-origin:left;animation:t5 17.11s linear infinite}
+@keyframes r6{0%,74.28%{opacity:0}74.29%,100%{opacity:1}}.r6{animation:r6 17.11s linear infinite}
+@media (prefers-reduced-motion: reduce){g,rect{animation:none!important;opacity:1!important;transform:none!important}}
+</style>
+<rect width="940" height="208" rx="10" fill="#0d1117"/>
+<rect width="940" height="32" rx="10" fill="#161b22"/><rect y="22" width="940" height="10" fill="#161b22"/>
+<circle cx="20" cy="16" r="6" fill="#ff5f57"/><circle cx="40" cy="16" r="6" fill="#febc2e"/><circle cx="60" cy="16" r="6" fill="#28c840"/>
+<text x="470" y="20" text-anchor="middle" class="bar">Create a sandbox and run a command</text>
+<g class="r0"><clipPath id="c0"><rect class="t0" x="18" y="47" width="708.6999999999999" height="20"/></clipPath><text x="18" y="62" class="cmd" clip-path="url(#c0)"><tspan class="ps">$</tspan> opengen doctor | jq -c '{ready: .runtime.ready, backend: .runtime.backend, profiles}'</text></g>
+<g class="r1"><text x="18" y="82" class="out">{"ready":true,"backend":"docker","profiles":["node"]}</text></g>
+<g class="r2"><clipPath id="c2"><rect class="t2" x="18" y="87" width="319.9" height="20"/></clipPath><text x="18" y="102" class="cmd" clip-path="url(#c2)"><tspan class="ps">$</tspan> ID=$(opengen create demo | jq -r .id)</text></g>
+<g class="r3"><clipPath id="c3"><rect class="t3" x="18" y="107" width="571" height="20"/></clipPath><text x="18" y="122" class="cmd" clip-path="url(#c3)"><tspan class="ps">$</tspan> opengen status $ID --project demo | jq -c '{state, network, limits}'</text></g>
+<g class="r4"><text x="18" y="142" class="out">{"state":"running","network":"none","limits":{"memoryMb":2048,"cpus":2,"pids":256}}</text></g>
+<g class="r5"><clipPath id="c5"><rect class="t5" x="18" y="147" width="741.1" height="20"/></clipPath><text x="18" y="162" class="cmd" clip-path="url(#c5)"><tspan class="ps">$</tspan> opengen exec $ID --project demo -- node -p "process.version" | jq -c '{exitCode, stdout}'</text></g>
+<g class="r6"><text x="18" y="182" class="out">{"exitCode":0,"stdout":"v24.21.0\n"}</text></g>
+</svg>

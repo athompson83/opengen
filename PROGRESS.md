@@ -1,5 +1,24 @@
 # Progress
 
+## 2026-10-19 — Feature demos recorded from real sessions
+
+The README now opens with a features section in the style of other agent tools:
+each feature sits beside an animated terminal recording of it working. The
+recordings are produced by `npm run readme:record` (`scripts/record-readme.mjs`),
+which starts a private service against the local Docker daemon, runs each
+scenario's commands, renders exactly what printed as an SVG, and deletes its
+sandboxes. It fails rather than saving a recording when a command errors.
+Runtime, protocol, image and CLI behaviour are unchanged.
+
+### Verification
+
+- `npm run check`: 24 modules pass syntax checks; 43 tests pass, 1 Docker test
+  skipped by design. The new README test checks every local image and link,
+  that each recorded demo is shown, and that recorded text is escaped.
+- `npm run test:docker` on Docker 29.8.2 (Linux): 8 of 8 pass.
+- All seven recordings were made on that daemon and inspected; two were also
+  rendered in Chromium mid-animation and at the end.
+
 ## 2026-10-07 — Developer-portal discovery
 
 The README and client-integration guide now link the live

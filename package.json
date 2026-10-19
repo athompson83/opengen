@@ -19,7 +19,8 @@
     "images:build": "node scripts/build-images.mjs",
     "test": "node --test test/*.test.mjs",
     "test:docker": "node scripts/test-docker.mjs",
-    "check": "node scripts/check.mjs"
+    "check": "node scripts/check.mjs",
+    "readme:record": "node scripts/record-readme.mjs"
   },
   "repository": { "type": "git", "url": "https://github.com/athompson83/opengen.git" }
 }
