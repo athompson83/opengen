@@ -1,5 +1,19 @@
 # Progress
 
+## 2026-10-26 — README: tutorials, screenshots, features, connections and contributing
+
+The README opens with an animated banner and now has:
+
+- **Four animated tutorials:** first sandbox, preview a web app, use OpenGen from your app, and stop/reset/keep files. Each shows a step list that lights up while that step's real session plays. They are recorded by the same `npm run readme:record` against a real Docker daemon (`renderTutorial` in `scripts/record-readme.mjs`), and each tutorial runs as one shell session.
+- **Two real screenshots:** a sample app served from a sandbox and opened in Chromium at its loopback preview URL, and the live Genisys OpenGen guide page.
+- **A feature table**, a **connections table** with logo tiles and an honest status per connection, and step-by-step **contribution** instructions.
+
+Logos come from Simple Icons 16.36.0 (CC0) plus the owner's Genisys symbol; provenance is in `docs/THIRD_PARTY.md`. Runtime, protocol, image and CLI behaviour are unchanged.
+
+Checks on October 26:
+- `npm run check`: 44 pass, 0 fail, 1 skipped.
+- `npm run test:docker` on a local Docker 29.8.2 daemon: 8/8 pass.
+
 ## 2026-10-19 — Feature demos recorded from real sessions
 
 The README now opens with a features section in the style of other agent tools:

@@ -1,4 +1,6 @@
-<h1 align="center">OpenGen</h1>
+<p align="center">
+  <img src="docs/assets/readme/hero.svg" alt="OpenGen: local sandboxes for AI agents and the apps that run them. An app sends commands over a loopback API to three locked, offline Docker sandboxes." width="960" />
+</p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/license-Apache--2.0-08C?style=flat" alt="License: Apache-2.0" />
@@ -8,8 +10,17 @@
 </p>
 
 <p align="center">
-  <strong>Local sandboxes for AI agents and the apps that run them.</strong><br/>
-  Run commands and keep project files in locked-down Docker containers, from a CLI, a loopback HTTP API or a small JavaScript client.
+  <strong>Run commands and keep project files in locked-down Docker containers,</strong><br/>
+  from a CLI, a loopback HTTP API or a small JavaScript client.
+</p>
+
+<p align="center">
+  <a href="#quick-start">Quick start</a> ·
+  <a href="#tutorials">Tutorials</a> ·
+  <a href="#features">Features</a> ·
+  <a href="#screenshots">Screenshots</a> ·
+  <a href="#connections">Connections</a> ·
+  <a href="#contributing">Contributing</a>
 </p>
 
 <p align="center">
@@ -21,10 +32,127 @@ account, a paid subscription or an AI provider key. The initial release is a **s
 runtime**: it is not an audited security product, a microVM runtime or a shared hosted service. Read
 [SECURITY.md](SECURITY.md) before running untrusted workloads.
 
-Every recording below is a real session against a local Docker daemon, captured by
-[`npm run readme:record`](scripts/record-readme.mjs); nothing in them is typed by hand.
+Every terminal recording and tutorial on this page is a real session against a local Docker daemon, captured by
+[`npm run readme:record`](scripts/record-readme.mjs). Nothing in them is typed by hand. The screenshots were taken
+from real sessions on October 26, 2026.
+
+## Quick start
+
+You need Node.js 24, npm, Git, and a local Docker daemon running Linux containers.
+
+```sh
+git clone https://github.com/athompson83/opengen.git
+cd opengen
+npm ci --ignore-scripts
+npm run images:build        # builds the sandbox image (needs internet once)
+node bin/opengen.mjs init   # creates local settings and a private owner token
+npm run doctor              # checks Docker and the image
+npm start                   # serves the API on 127.0.0.1:47831
+```
+
+In a second terminal:
+
+```sh
+ID=$(node bin/opengen.mjs create demo | jq -r .id)
+node bin/opengen.mjs exec $ID --project demo -- node -p "'hello from the sandbox'"
+```
+
+[Local operation](docs/LOCAL.md) covers configuration, recovery and every CLI command.
+
+## Tutorials
+
+Four short animated walkthroughs. The steps on the left light up as each one plays on the right, using commands
+and output recorded from a real session.
+
+<p align="center">
+  <img src="docs/assets/readme/tutorial-first-sandbox.svg" alt="Tutorial 1, Your first sandbox: check that Docker is ready, create a sandbox, run a command inside, write and read a file, clean up" width="960" />
+</p>
+
+<details>
+<summary><b>Tutorial 1 commands: your first sandbox</b></summary>
+
+```sh
+opengen doctor
+ID=$(opengen create hello | jq -r .id)
+opengen exec $ID --project hello -- node -p "'Hello from ' + process.platform"
+opengen exec $ID --project hello -- sh -c "echo 'my first notes' > notes.txt"
+opengen read $ID notes.txt --project hello | jq -r .content | base64 -d
+opengen delete $ID --project hello --delete-workspace
+```
+
+`opengen` is `node bin/opengen.mjs`, or the `opengen` command after `npm link`.
+</details>
+
+<p align="center">
+  <img src="docs/assets/readme/tutorial-preview-app.svg" alt="Tutorial 2, Build and preview a web app: create a sandbox with a port, write the app, start it, open the loopback preview" width="960" />
+</p>
+
+<details>
+<summary><b>Tutorial 2 commands: build and preview a web app</b></summary>
+
+The service must allow networking: `opengen serve --allow-network`.
+
+```sh
+ID=$(opengen create webapp --network bridge --port 3000 | jq -r .id)
+URL=$(opengen status $ID --project webapp | jq -r '.ports[0].url')
+opengen write $ID server.js --project webapp --file ./server.js
+opengen exec $ID --project webapp -- sh -c "nohup node server.js >/dev/null 2>&1 &"
+curl -s $URL
+```
+</details>
+
+<p align="center">
+  <img src="docs/assets/readme/tutorial-from-your-app.svg" alt="Tutorial 3, Use OpenGen from your app: authenticate with the owner token, create a sandbox over HTTP, run a command over HTTP, or use the JavaScript client" width="960" />
+</p>
+
+<details>
+<summary><b>Tutorial 3 commands: use OpenGen from your app</b></summary>
+
+```sh
+H="Authorization: Bearer $(cat ~/.opengen/token)"
+curl -s -H "$H" http://127.0.0.1:47831/v1/health
+curl -s -H "$H" -H "Content-Type: application/json" -d '{"projectId":"api-demo"}' http://127.0.0.1:47831/v1/sandboxes
+curl -s -H "$H" -H "Content-Type: application/json" \
+  -d '{"projectId":"api-demo","argv":["node","-p","6*7"]}' http://127.0.0.1:47831/v1/sandboxes/$ID/exec
+node examples/local-client.mjs
+```
+
+See the [API contract](docs/API.md) and the [JavaScript example](docs/INTEGRATION.md#javascript-example).
+</details>
+
+<p align="center">
+  <img src="docs/assets/readme/tutorial-lifecycle.svg" alt="Tutorial 4, Stop, reset and keep your files: save work, stop and start, reset a broken sandbox and read the file back, list what is running" width="960" />
+</p>
+
+<details>
+<summary><b>Tutorial 4 commands: stop, reset and keep your files</b></summary>
+
+```sh
+ID=$(opengen create keep | jq -r .id)
+opengen exec $ID --project keep -- sh -c "echo 'draft v1' > draft.txt"
+opengen stop $ID --project keep
+opengen start $ID --project keep
+opengen reset $ID --project keep            # new container, same files
+opengen read $ID draft.txt --project keep | jq -r .content | base64 -d
+opengen list --project keep
+```
+</details>
 
 ## Features
+
+| | Feature | What you get | Learn more |
+| :---: | --- | --- | --- |
+| 🔒 | **Locked down by default** | Non-root user, read-only root filesystem, CPU/memory/process limits, no network unless the operator allows it | [Security](SECURITY.md#controls-implemented-by-the-docker-adapter) |
+| 📁 | **Files that stay put** | A managed workspace that survives stop, start, reset and service restarts; deletion is always explicit | [Local operation](docs/LOCAL.md#create-run-and-inspect) |
+| ⏱️ | **Every command has a deadline** | Per-command timeouts (100 ms – 15 min); a runaway command stops its sandbox | [Execute](docs/API.md#execute) |
+| 🌐 | **Local previews** | Up to five container ports per sandbox, published only on `127.0.0.1` | [Previews](docs/LOCAL.md#local-application-previews) |
+| 🧩 | **JavaScript client** | Create, write, read, run, stop, reset and delete from a trusted backend, with TypeScript declarations | [Integration](docs/INTEGRATION.md#javascript-example) |
+| 🛡️ | **API that stays on your machine** | Loopback-only HTTP API; owner token on every call; browser origins rejected | [API](docs/API.md) |
+| 🗂️ | **Projects** | Every sandbox belongs to a project; a mismatched project is treated as not found | [API](docs/API.md#routes) |
+| 🖥️ | **CLI** | One `opengen` command for init, doctor, serve and every sandbox action, with JSON output | [Local operation](docs/LOCAL.md) |
+| ✅ | **Honest verification** | Source checks without Docker, plus a real-daemon suite for isolation, lifecycle, files, timeouts and previews | [Verification](docs/VERIFICATION.md) |
+
+### See it in action
 
 <table>
 <tr>
@@ -115,52 +243,63 @@ The HTTP API listens on 127.0.0.1 only, needs the owner token on every call, and
 
 OpenGen does not include an AI model, hosted compute, a browser automation engine, a graphical terminal or
 remote-device connectivity; a client application builds those on the runtime. The backend calls Docker directly.
-OpenSandbox and microVM backends are future candidates, not implemented adapters.
 
-## Run from source
+## Screenshots
 
-You need Node.js 24, npm, Git, and access to a local Docker daemon running Linux
-containers. Use a dedicated development environment for workloads you do not
-trust. Docker Desktop users should review its separate installation and licensing
-requirements; OpenGen does not redistribute Docker Desktop.
+<table>
+<tr>
+<td width="50%" valign="top">
+  <img src="docs/assets/readme/screenshots/sandbox-preview.png" alt="Chromium showing a habit tracker web app at a 127.0.0.1 loopback preview URL, served by node server.js inside an OpenGen sandbox running Node.js v24.21.0" width="100%" />
+  <p><b>An app running in a sandbox.</b> A habit tracker served by <code>node server.js</code> inside the container, opened at its loopback preview URL.</p>
+</td>
+<td width="50%" valign="top">
+  <img src="docs/assets/readme/screenshots/genisys-opengen-guide.png" alt="The OpenGen page of the Genisys developer guide, explaining that OpenGen is a separate Apache-2.0 product and listing the setup commands" width="100%" />
+  <p><b>The Genisys developer guide.</b> Setup steps for connecting OpenGen to the Genisys desktop Developer Console, an optional separate app.</p>
+</td>
+</tr>
+</table>
 
-```sh
-git clone https://github.com/athompson83/opengen.git
-cd opengen
-npm ci --ignore-scripts
-npm run images:build
-node bin/opengen.mjs init
-npm run doctor
-npm start
-```
+## Connections
 
-The API listens on `127.0.0.1:47831` by default. Initialization creates local
-configuration and an authentication token in the OpenGen state directory. Keep
-the token private; it grants access to every sandbox owned by this runtime.
-The CLI uses that local configuration. See [local operation](docs/LOCAL.md) for
-commands, configuration, and recovery.
+Everything OpenGen connects to, and how far each connection is proven.
 
-The provided image build refreshes its base image and requires internet access.
-Once the image is built, disconnected workloads can run with locally available
-tools and files. Package downloads, remote models, and external services still
-need network access and may have their own costs.
+| | Connection | How OpenGen uses it | Status |
+| :---: | --- | --- | --- |
+| <img src="docs/assets/logos/docker.svg" alt="Docker" width="32" height="32" /> | **Docker Engine (Linux)** | The container backend. OpenGen calls the Docker CLI directly and creates only its own managed containers and volumes | ✅ Verified in CI and `npm run test:docker` |
+| <img src="docs/assets/logos/docker.svg" alt="Docker" width="32" height="32" /> | **Docker Desktop (macOS, Windows)** | The same Docker CLI in Linux-container mode | ⚠️ Expected to work; not yet validated on those systems |
+| <img src="docs/assets/logos/linux.svg" alt="Linux" width="32" height="32" /> | **Linux host** | Where the CI and real-daemon suite run | ✅ Verified (Ubuntu CI) |
+| <img src="docs/assets/logos/nodedotjs.svg" alt="Node.js" width="32" height="32" /> | **Node.js 24** | Runs the CLI, service and client; also the interpreter inside the sandbox image | ✅ Required and verified |
+| <img src="docs/assets/logos/debian.svg" alt="Debian" width="32" height="32" /> | **Official Node.js image (Debian Bookworm)** | Base of the sandbox image, `node:24.21.0-bookworm-slim` ([provenance](docs/THIRD_PARTY.md)) | ✅ Built and tested |
+| <img src="docs/assets/logos/cli.svg" alt="Command line" width="32" height="32" /> | **`opengen` CLI** | init, doctor, serve and every sandbox action, with JSON output | ✅ Tested |
+| <img src="docs/assets/logos/http.svg" alt="HTTP API" width="32" height="32" /> | **HTTP API** | Loopback JSON API for any language or backend | ✅ Tested |
+| <img src="docs/assets/logos/javascript.svg" alt="JavaScript" width="32" height="32" /> | **JavaScript client** | `@opengen/sandbox` ES module for trusted backend code | ✅ Tested; example recorded |
+| <img src="docs/assets/logos/typescript.svg" alt="TypeScript" width="32" height="32" /> | **TypeScript** | Declarations in [`src/client.d.ts`](src/client.d.ts) | ✅ Included |
+| <img src="docs/assets/logos/curl.svg" alt="curl" width="32" height="32" /> | **curl and other HTTP clients** | Call the API directly, as in Tutorial 3 | ✅ Recorded |
+| <img src="docs/assets/logos/npm.svg" alt="npm" width="32" height="32" /> | **npm** | Install with the committed lockfile; run `check`, `test:docker`, `images:build` and `readme:record` | ✅ Used in CI |
+| <img src="docs/assets/logos/githubactions.svg" alt="GitHub Actions" width="32" height="32" /> | **GitHub Actions** | One bounded Ubuntu verification job; publishes nothing | ✅ CI only |
+| <img src="docs/assets/logos/genisys.svg" alt="Genisys" width="32" height="32" /> | **Genisys desktop Developer Console** | An optional client application that uses the public API ([guide](https://genisys.aroqon.com/developers/opengen/)). Genisys Local Mode is a separate paid app plan; OpenGen stays free and independent | 🔗 Integration-tested in the Genisys repository |
+| — | **OpenSandbox, microVM backends** | Future candidates behind the runtime interface | 🧭 Planned, not implemented |
+
+Logos are trademarks of their owners and are shown only to identify compatible software. Icons are from
+[Simple Icons](https://simpleicons.org/) (CC0-1.0); see [third-party provenance](docs/THIRD_PARTY.md).
 
 ## Use from another application
 
-The public interface supports sandbox creation, command execution, file access,
-stop/start, reset, deletion, and local previews. Use the JavaScript client or the
-HTTP API from a trusted local backend process. Direct browser requests are
-rejected.
+The public interface supports sandbox creation, command execution, file access, stop/start, reset, deletion and
+local previews. Use the JavaScript client or the HTTP API from a trusted local backend process. Direct browser
+requests are rejected.
 
 - [API contract](docs/API.md)
 - [Client application integration](docs/INTEGRATION.md)
 - [Architecture](ARCHITECTURE.md)
 
-Genisys users can follow the [OpenGen developer guide](https://genisys.aroqon.com/developers/opengen/)
-for setup and the separate developer-console connection. The console is delivered
-with Genisys; this repository does not install or upgrade that application.
-**OpenGen stays free and independent. Genisys Local Mode is a separate paid app
-offering.** No proprietary application source or paid service is required by OpenGen.
+Initialization creates local configuration and an authentication token in the OpenGen state directory. Keep the
+token private: it grants access to every sandbox owned by this runtime. The provided image build refreshes its base
+image and requires internet access. Once the image is built, offline workloads can run with locally available
+tools and files.
+
+Docker Desktop users should review its separate installation and licensing requirements; OpenGen does not
+redistribute Docker Desktop. Use a dedicated development environment for workloads you do not trust.
 
 ## Verify
 
@@ -170,23 +309,53 @@ npm run images:build
 npm run test:docker
 ```
 
-`check` verifies source behavior without a Docker daemon (including that every image this README shows exists). `test:docker` requires a
-real local Linux Docker daemon and the built image; it exercises container
-configuration, lifecycle, file persistence, timeouts, project boundaries, and
-preview binding. See [verification](docs/VERIFICATION.md) for what the evidence
-does and does not establish.
+`check` verifies source behaviour without a Docker daemon, including that every image this README shows exists.
+`test:docker` requires a real local Linux Docker daemon and the built image. It exercises:
 
-After a change to the CLI, API or image, re-record the feature demos with `npm run readme:record` (it needs Docker,
-bash, curl and jq, uses a private state directory, and deletes its sandboxes) and commit the updated SVGs.
+- container configuration and lifecycle;
+- file persistence;
+- timeouts;
+- project boundaries;
+- preview binding.
 
-CI runs one bounded Ubuntu job on relevant code changes. It does not run paid
-models, publish images, or deploy infrastructure. Native Windows and macOS
-compatibility must be validated separately; passing Linux CI is not evidence that
-all desktop configurations work.
+See [verification](docs/VERIFICATION.md) for what the evidence does and does not establish.
 
-## License and contributions
+CI runs one bounded Ubuntu job on relevant code changes. It does not run paid models, publish images or deploy
+infrastructure. Passing Linux CI is not evidence that every desktop configuration works.
 
-OpenGen is licensed under [Apache-2.0](LICENSE). The original repository license
-is preserved. See [NOTICE](NOTICE) and [third-party provenance](docs/THIRD_PARTY.md)
-for external components. See [CONTRIBUTING.md](CONTRIBUTING.md) to contribute and
-[SECURITY.md](SECURITY.md) to report security issues.
+## Contributing
+
+Contributions are welcome. Start with [CONTRIBUTING.md](CONTRIBUTING.md); the short version:
+
+1. **Read the boundaries.** [AGENTS.md](AGENTS.md), [ARCHITECTURE.md](ARCHITECTURE.md) and [SECURITY.md](SECURITY.md)
+   explain what the runtime must never do. For example, it never falls back to running commands on the host, and
+   never accepts host mounts or Docker sockets from a client.
+2. **Fork and clone,** then install with the lockfile:
+   ```sh
+   npm ci --ignore-scripts
+   ```
+3. **Make one focused change,** and add a regression test when behaviour or a security boundary changes.
+4. **Run the checks:**
+   ```sh
+   npm run check                              # always
+   npm run images:build && npm run test:docker  # images, lifecycle, files, execution or network changes
+   ```
+5. **Re-record the demos and tutorials** if you changed the CLI, API or image. This needs Docker, bash, curl and jq,
+   and uses a private state directory:
+   ```sh
+   npm run readme:record
+   ```
+   Commit the updated SVGs.
+6. **Open a pull request** that explains:
+   - the behaviour being fixed;
+   - the change;
+   - which checks ran on a real Docker daemon and which used a test double.
+
+Use built-in Node.js APIs unless a dependency solves a demonstrated problem. Record the provenance of anything you
+copy from elsewhere. Never commit credentials, owner tokens, runtime state or private material. Report security
+issues privately as described in [SECURITY.md](SECURITY.md).
+
+## License
+
+OpenGen is licensed under [Apache-2.0](LICENSE). See [NOTICE](NOTICE) and [third-party provenance](docs/THIRD_PARTY.md)
+for external components.

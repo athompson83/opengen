@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="524" viewBox="0 0 960 524" role="img" aria-label="Tutorial 1: Your first sandbox. Steps: 1. Check that Docker is ready 2. Create a sandbox 3. Run a command inside 4. Write and read a file 5. Clean up. Recorded from a real OpenGen session.">
+<title>Tutorial 1: Your first sandbox</title>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b1220"/><stop offset="1" stop-color="#111a2e"/></linearGradient>
+<linearGradient id="accent" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2f81f7"/><stop offset="1" stop-color="#00b4d8"/></linearGradient></defs>
+<style>
+text{font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;white-space:pre}
+.kicker{fill:#7ee0ff;font-size:12px;font-weight:700;letter-spacing:.12em}.title{fill:#f0f6fc;font-size:22px;font-weight:700}
+.num{fill:#fff;font-size:13px;font-weight:700}.cap{fill:#f0f6fc;font-size:14.5px;font-weight:600}.det{fill:#9aa7b4;font-size:12.5px}
+.cmd,.out{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:13.5px}.cmd{fill:#e6edf3}.ps{fill:#3fb950;font-weight:700}.out{fill:#8b949e}
+.bar{fill:#8b949e;font-size:12px}.hlr{fill:#2f81f71f;stroke:#2f81f766}.pg{transform-origin:left;transform-box:fill-box}
+@keyframes hl{0%{transform:translateY(0)}2.41%,16.45%{transform:translateY(0px)}17.35%,38.94%{transform:translateY(74px)}39.84%,53.88%{transform:translateY(148px)}54.78%,79.34%{transform:translateY(222px)}80.25%,94.27%{transform:translateY(296px)}100%{transform:translateY(296px)}}.hl{animation:hl 33.13s linear infinite}
+@keyframes d0{0%,2.41%{fill:#30363d}2.42%,100%{fill:#2f81f7}}.d0{animation:d0 33.13s linear infinite}
+@keyframes l0{0%,2.41%{opacity:.55}2.42%,100%{opacity:1}}.l0{animation:l0 33.13s linear infinite}
+@keyframes d1{0%,17.35%{fill:#30363d}17.36%,100%{fill:#2f81f7}}.d1{animation:d1 33.13s linear infinite}
+@keyframes l1{0%,17.35%{opacity:.55}17.36%,100%{opacity:1}}.l1{animation:l1 33.13s linear infinite}
+@keyframes d2{0%,39.84%{fill:#30363d}39.85%,100%{fill:#2f81f7}}.d2{animation:d2 33.13s linear infinite}
+@keyframes l2{0%,39.84%{opacity:.55}39.85%,100%{opacity:1}}.l2{animation:l2 33.13s linear infinite}
+@keyframes d3{0%,54.78%{fill:#30363d}54.79%,100%{fill:#2f81f7}}.d3{animation:d3 33.13s linear infinite}
+@keyframes l3{0%,54.78%{opacity:.55}54.79%,100%{opacity:1}}.l3{animation:l3 33.13s linear infinite}
+@keyframes d4{0%,80.25%{fill:#30363d}80.26%,100%{fill:#2f81f7}}.d4{animation:d4 33.13s linear infinite}
+@keyframes l4{0%,80.25%{opacity:.55}80.26%,100%{opacity:1}}.l4{animation:l4 33.13s linear infinite}
+@keyframes s0{0%,1.66%{opacity:0}2.41%,17.35%{opacity:1}18.11%,100%{opacity:0}}.s0{animation:s0 33.13s linear infinite}
+@keyframes r0_0{0%,2.41%{opacity:0}2.42%,100%{opacity:1}}.r0_0{animation:r0_0 33.13s linear infinite}
+@keyframes t0_0{0%,2.41%{transform:scaleX(0)}6.04%,100%{transform:scaleX(1)}}.t0_0{transform-box:fill-box;transform-origin:left;animation:t0_0 33.13s linear infinite}
+@keyframes r0_1{0%,6.04%{opacity:0}6.05%,100%{opacity:1}}.r0_1{animation:r0_1 33.13s linear infinite}
+@keyframes t0_1{0%,6.04%{transform:scaleX(0)}9.66%,100%{transform:scaleX(1)}}.t0_1{transform-box:fill-box;transform-origin:left;animation:t0_1 33.13s linear infinite}
+@keyframes r0_2{0%,10.71%{opacity:0}10.72%,100%{opacity:1}}.r0_2{animation:r0_2 33.13s linear infinite}
+@keyframes s1{0%,16.60%{opacity:0}17.35%,39.84%{opacity:1}40.60%,100%{opacity:0}}.s1{animation:s1 33.13s linear infinite}
+@keyframes r1_0{0%,17.35%{opacity:0}17.36%,100%{opacity:1}}.r1_0{animation:r1_0 33.13s linear infinite}
+@keyframes t1_0{0%,17.35%{transform:scaleX(0)}22.47%,100%{transform:scaleX(1)}}.t1_0{transform-box:fill-box;transform-origin:left;animation:t1_0 33.13s linear infinite}
+@keyframes r1_1{0%,23.52%{opacity:0}23.53%,100%{opacity:1}}.r1_1{animation:r1_1 33.13s linear infinite}
+@keyframes r1_2{0%,25.94%{opacity:0}25.95%,100%{opacity:1}}.r1_2{animation:r1_2 33.13s linear infinite}
+@keyframes t1_2{0%,25.94%{transform:scaleX(0)}32.15%,100%{transform:scaleX(1)}}.t1_2{transform-box:fill-box;transform-origin:left;animation:t1_2 33.13s linear infinite}
+@keyframes r1_3{0%,33.20%{opacity:0}33.21%,100%{opacity:1}}.r1_3{animation:r1_3 33.13s linear infinite}
+@keyframes s2{0%,39.09%{opacity:0}39.84%,54.78%{opacity:1}55.54%,100%{opacity:0}}.s2{animation:s2 33.13s linear infinite}
+@keyframes r2_0{0%,39.84%{opacity:0}39.85%,100%{opacity:1}}.r2_0{animation:r2_0 33.13s linear infinite}
+@keyframes t2_0{0%,39.84%{transform:scaleX(0)}43.47%,100%{transform:scaleX(1)}}.t2_0{transform-box:fill-box;transform-origin:left;animation:t2_0 33.13s linear infinite}
+@keyframes r2_1{0%,43.47%{opacity:0}43.48%,100%{opacity:1}}.r2_1{animation:r2_1 33.13s linear infinite}
+@keyframes t2_1{0%,43.47%{transform:scaleX(0)}47.09%,100%{transform:scaleX(1)}}.t2_1{transform-box:fill-box;transform-origin:left;animation:t2_1 33.13s linear infinite}
+@keyframes r2_2{0%,48.14%{opacity:0}48.15%,100%{opacity:1}}.r2_2{animation:r2_2 33.13s linear infinite}
+@keyframes s3{0%,54.03%{opacity:0}54.78%,80.25%{opacity:1}81.00%,100%{opacity:0}}.s3{animation:s3 33.13s linear infinite}
+@keyframes r3_0{0%,54.78%{opacity:0}54.79%,100%{opacity:1}}.r3_0{animation:r3_0 33.13s linear infinite}
+@keyframes t3_0{0%,54.78%{transform:scaleX(0)}58.41%,100%{transform:scaleX(1)}}.t3_0{transform-box:fill-box;transform-origin:left;animation:t3_0 33.13s linear infinite}
+@keyframes r3_1{0%,58.41%{opacity:0}58.42%,100%{opacity:1}}.r3_1{animation:r3_1 33.13s linear infinite}
+@keyframes t3_1{0%,58.41%{transform:scaleX(0)}62.03%,100%{transform:scaleX(1)}}.t3_1{transform-box:fill-box;transform-origin:left;animation:t3_1 33.13s linear infinite}
+@keyframes r3_2{0%,63.08%{opacity:0}63.09%,100%{opacity:1}}.r3_2{animation:r3_2 33.13s linear infinite}
+@keyframes r3_3{0%,65.50%{opacity:0}65.51%,100%{opacity:1}}.r3_3{animation:r3_3 33.13s linear infinite}
+@keyframes t3_3{0%,65.50%{transform:scaleX(0)}69.03%,100%{transform:scaleX(1)}}.t3_3{transform-box:fill-box;transform-origin:left;animation:t3_3 33.13s linear infinite}
+@keyframes r3_4{0%,69.03%{opacity:0}69.04%,100%{opacity:1}}.r3_4{animation:r3_4 33.13s linear infinite}
+@keyframes t3_4{0%,69.03%{transform:scaleX(0)}72.55%,100%{transform:scaleX(1)}}.t3_4{transform-box:fill-box;transform-origin:left;animation:t3_4 33.13s linear infinite}
+@keyframes r3_5{0%,73.61%{opacity:0}73.62%,100%{opacity:1}}.r3_5{animation:r3_5 33.13s linear infinite}
+@keyframes s4{0%,79.50%{opacity:0}80.25%,100%{opacity:1}}.s4{animation:s4 33.13s linear infinite}
+@keyframes r4_0{0%,80.25%{opacity:0}80.26%,100%{opacity:1}}.r4_0{animation:r4_0 33.13s linear infinite}
+@keyframes t4_0{0%,80.25%{transform:scaleX(0)}83.86%,100%{transform:scaleX(1)}}.t4_0{transform-box:fill-box;transform-origin:left;animation:t4_0 33.13s linear infinite}
+@keyframes r4_1{0%,83.86%{opacity:0}83.87%,100%{opacity:1}}.r4_1{animation:r4_1 33.13s linear infinite}
+@keyframes t4_1{0%,83.86%{transform:scaleX(0)}87.48%,100%{transform:scaleX(1)}}.t4_1{transform-box:fill-box;transform-origin:left;animation:t4_1 33.13s linear infinite}
+@keyframes r4_2{0%,88.53%{opacity:0}88.54%,100%{opacity:1}}.r4_2{animation:r4_2 33.13s linear infinite}
+@keyframes pg{0%{transform:scaleX(0)}100%{transform:scaleX(1)}}.pg{animation:pg 33.13s linear infinite}
+@media (prefers-reduced-motion: reduce){g,rect,circle{animation:none!important;opacity:1!important;transform:none!important}.scene{opacity:0!important}.scene.last{opacity:1!important}circle{fill:#2f81f7}}
+</style>
+<rect width="960" height="524" rx="14" fill="url(#bg)"/>
+<text x="24" y="34" class="kicker">OPENGEN TUTORIAL 1</text><text x="24" y="62" class="title">Your first sandbox</text>
+<rect class="hl hlr" x="14" y="92" width="312" height="68" rx="12"/>
+<g class="l0"><circle class="d0" cx="38" cy="124" r="13"/><text x="38" y="128.5" text-anchor="middle" class="num">1</text>
+<text x="62" y="117" class="cap">Check that Docker is ready</text><text x="62" y="136" class="det">doctor confirms the engine and the</text><text x="62" y="152" class="det">built image.</text></g>
+<g class="l1"><circle class="d1" cx="38" cy="198" r="13"/><text x="38" y="202.5" text-anchor="middle" class="num">2</text>
+<text x="62" y="191" class="cap">Create a sandbox</text><text x="62" y="210" class="det">One command; it starts locked down</text><text x="62" y="226" class="det">and offline.</text></g>
+<g class="l2"><circle class="d2" cx="38" cy="272" r="13"/><text x="38" y="276.5" text-anchor="middle" class="num">3</text>
+<text x="62" y="265" class="cap">Run a command inside</text><text x="62" y="284" class="det">Programs run in the container, never</text><text x="62" y="300" class="det">on your PC.</text></g>
+<g class="l3"><circle class="d3" cx="38" cy="346" r="13"/><text x="38" y="350.5" text-anchor="middle" class="num">4</text>
+<text x="62" y="339" class="cap">Write and read a file</text><text x="62" y="358" class="det">Files live in the sandbox workspace.</text></g>
+<g class="l4"><circle class="d4" cx="38" cy="420" r="13"/><text x="38" y="424.5" text-anchor="middle" class="num">5</text>
+<text x="62" y="413" class="cap">Clean up</text><text x="62" y="432" class="det">Deleting the workspace is always</text><text x="62" y="448" class="det">explicit.</text></g>
+<rect x="352" y="86" width="590" height="182" rx="10" fill="#0d1117" stroke="#30363d"/>
+<rect x="352" y="86" width="590" height="30" rx="10" fill="#161b22"/><rect x="352" y="106" width="590" height="10" fill="#161b22"/>
+<circle cx="370" cy="101" r="5.5" fill="#ff5f57"/><circle cx="388" cy="101" r="5.5" fill="#febc2e"/><circle cx="406" cy="101" r="5.5" fill="#28c840"/>
+<text x="647" y="105" text-anchor="middle" class="bar">recorded OpenGen session</text>
+<g class="scene s0"><g class="r0_0"><clipPath id="c0_0"><rect class="t0_0" x="370" y="127" width="473.79999999999995" height="20"/></clipPath><text x="370" y="142" class="cmd" clip-path="url(#c0_0)"><tspan class="ps">$</tspan> opengen doctor | jq -c '{ready: .runtime.ready, backend:</text></g>
+<g class="r0_1"><clipPath id="c0_1"><rect class="t0_1" x="370" y="147" width="166" height="20"/></clipPath><text x="370" y="162" class="cmd" clip-path="url(#c0_1)">  .runtime.backend}'</text></g>
+<g class="r0_2"><text x="370" y="182" class="out">{"ready":true,"backend":"docker"}</text></g></g>
+<g class="scene s1"><g class="r1_0"><clipPath id="c1_0"><rect class="t1_0" x="370" y="127" width="409" height="20"/></clipPath><text x="370" y="142" class="cmd" clip-path="url(#c1_0)"><tspan class="ps">$</tspan> ID=$(opengen create hello | jq -r .id); echo $ID</text></g>
+<g class="r1_1"><text x="370" y="162" class="out">3b401c2a-2b75-4a98-92dc-2003c3dea992</text></g>
+<g class="r1_2"><clipPath id="c1_2"><rect class="t1_2" x="370" y="167" width="514.3" height="20"/></clipPath><text x="370" y="182" class="cmd" clip-path="url(#c1_2)"><tspan class="ps">$</tspan> opengen status $ID --project hello | jq -c '{state, network}'</text></g>
+<g class="r1_3"><text x="370" y="202" class="out">{"state":"running","network":"none"}</text></g></g>
+<g class="scene s2"><g class="r2_0"><clipPath id="c2_0"><rect class="t2_0" x="370" y="127" width="506.2" height="20"/></clipPath><text x="370" y="142" class="cmd" clip-path="url(#c2_0)"><tspan class="ps">$</tspan> opengen exec $ID --project hello -- node -p "'Hello from ' +</text></g>
+<g class="r2_1"><clipPath id="c2_1"><rect class="t2_1" x="370" y="147" width="287.5" height="20"/></clipPath><text x="370" y="162" class="cmd" clip-path="url(#c2_1)">  process.platform" | jq -r .stdout</text></g>
+<g class="r2_2"><text x="370" y="182" class="out">Hello from linux</text></g></g>
+<g class="scene s3"><g class="r3_0"><clipPath id="c3_0"><rect class="t3_0" x="370" y="127" width="554.8" height="20"/></clipPath><text x="370" y="142" class="cmd" clip-path="url(#c3_0)"><tspan class="ps">$</tspan> opengen exec $ID --project hello -- sh -c "echo 'my first notes' &gt;</text></g>
+<g class="r3_1"><clipPath id="c3_1"><rect class="t3_1" x="370" y="147" width="271.3" height="20"/></clipPath><text x="370" y="162" class="cmd" clip-path="url(#c3_1)">  notes.txt" | jq -c '{exitCode}'</text></g>
+<g class="r3_2"><text x="370" y="182" class="out">{"exitCode":0}</text></g>
+<g class="r3_3"><clipPath id="c3_3"><rect class="t3_3" x="370" y="187" width="571" height="20"/></clipPath><text x="370" y="202" class="cmd" clip-path="url(#c3_3)"><tspan class="ps">$</tspan> opengen read $ID notes.txt --project hello | jq -r .content | base64</text></g>
+<g class="r3_4"><clipPath id="c3_4"><rect class="t3_4" x="370" y="207" width="36.4" height="20"/></clipPath><text x="370" y="222" class="cmd" clip-path="url(#c3_4)">  -d</text></g>
+<g class="r3_5"><text x="370" y="242" class="out">my first notes</text></g></g>
+<g class="scene s4 last"><g class="r4_0"><clipPath id="c4_0"><rect class="t4_0" x="370" y="127" width="514.3" height="20"/></clipPath><text x="370" y="142" class="cmd" clip-path="url(#c4_0)"><tspan class="ps">$</tspan> opengen delete $ID --project hello --delete-workspace | jq -c</text></g>
+<g class="r4_1"><clipPath id="c4_1"><rect class="t4_1" x="370" y="147" width="109.3" height="20"/></clipPath><text x="370" y="162" class="cmd" clip-path="url(#c4_1)">  '{deleted}'</text></g>
+<g class="r4_2"><text x="370" y="182" class="out">{"deleted":true}</text></g></g>
+<rect x="24" y="502" width="912" height="5" rx="2.5" fill="#21262d"/><rect class="pg" x="24" y="502" width="912" height="5" rx="2.5" fill="url(#accent)"/>
+</svg>

@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="450" viewBox="0 0 960 450" role="img" aria-label="Tutorial 3: Use OpenGen from your app. Steps: 1. Authenticate 2. Create over HTTP 3. Run a command over HTTP 4. Or use the JavaScript client. Recorded from a real OpenGen session.">
+<title>Tutorial 3: Use OpenGen from your app</title>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b1220"/><stop offset="1" stop-color="#111a2e"/></linearGradient>
+<linearGradient id="accent" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2f81f7"/><stop offset="1" stop-color="#00b4d8"/></linearGradient></defs>
+<style>
+text{font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;white-space:pre}
+.kicker{fill:#7ee0ff;font-size:12px;font-weight:700;letter-spacing:.12em}.title{fill:#f0f6fc;font-size:22px;font-weight:700}
+.num{fill:#fff;font-size:13px;font-weight:700}.cap{fill:#f0f6fc;font-size:14.5px;font-weight:600}.det{fill:#9aa7b4;font-size:12.5px}
+.cmd,.out{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:13.5px}.cmd{fill:#e6edf3}.ps{fill:#3fb950;font-weight:700}.out{fill:#8b949e}
+.bar{fill:#8b949e;font-size:12px}.hlr{fill:#2f81f71f;stroke:#2f81f766}.pg{transform-origin:left;transform-box:fill-box}
+@keyframes hl{0%{transform:translateY(0)}3.25%,22.11%{transform:translateY(0px)}23.33%,42.20%{transform:translateY(74px)}43.41%,62.28%{transform:translateY(148px)}63.50%,92.29%{transform:translateY(222px)}100%{transform:translateY(222px)}}.hl{animation:hl 24.65s linear infinite}
+@keyframes d0{0%,3.25%{fill:#30363d}3.26%,100%{fill:#2f81f7}}.d0{animation:d0 24.65s linear infinite}
+@keyframes l0{0%,3.25%{opacity:.55}3.26%,100%{opacity:1}}.l0{animation:l0 24.65s linear infinite}
+@keyframes d1{0%,23.33%{fill:#30363d}23.34%,100%{fill:#2f81f7}}.d1{animation:d1 24.65s linear infinite}
+@keyframes l1{0%,23.33%{opacity:.55}23.34%,100%{opacity:1}}.l1{animation:l1 24.65s linear infinite}
+@keyframes d2{0%,43.41%{fill:#30363d}43.42%,100%{fill:#2f81f7}}.d2{animation:d2 24.65s linear infinite}
+@keyframes l2{0%,43.41%{opacity:.55}43.42%,100%{opacity:1}}.l2{animation:l2 24.65s linear infinite}
+@keyframes d3{0%,63.50%{fill:#30363d}63.51%,100%{fill:#2f81f7}}.d3{animation:d3 24.65s linear infinite}
+@keyframes l3{0%,63.50%{opacity:.55}63.51%,100%{opacity:1}}.l3{animation:l3 24.65s linear infinite}
+@keyframes s0{0%,2.23%{opacity:0}3.25%,23.33%{opacity:1}24.34%,100%{opacity:0}}.s0{animation:s0 24.65s linear infinite}
+@keyframes r0_0{0%,3.25%{opacity:0}3.26%,100%{opacity:1}}.r0_0{animation:r0_0 24.65s linear infinite}
+@keyframes t0_0{0%,3.25%{transform:scaleX(0)}8.11%,100%{transform:scaleX(1)}}.t0_0{transform-box:fill-box;transform-origin:left;animation:t0_0 24.65s linear infinite}
+@keyframes r0_1{0%,8.11%{opacity:0}8.12%,100%{opacity:1}}.r0_1{animation:r0_1 24.65s linear infinite}
+@keyframes t0_1{0%,8.11%{transform:scaleX(0)}12.98%,100%{transform:scaleX(1)}}.t0_1{transform-box:fill-box;transform-origin:left;animation:t0_1 24.65s linear infinite}
+@keyframes r0_2{0%,14.40%{opacity:0}14.41%,100%{opacity:1}}.r0_2{animation:r0_2 24.65s linear infinite}
+@keyframes s1{0%,22.32%{opacity:0}23.33%,43.41%{opacity:1}44.43%,100%{opacity:0}}.s1{animation:s1 24.65s linear infinite}
+@keyframes r1_0{0%,23.33%{opacity:0}23.34%,100%{opacity:1}}.r1_0{animation:r1_0 24.65s linear infinite}
+@keyframes t1_0{0%,23.33%{transform:scaleX(0)}26.58%,100%{transform:scaleX(1)}}.t1_0{transform-box:fill-box;transform-origin:left;animation:t1_0 24.65s linear infinite}
+@keyframes r1_1{0%,26.58%{opacity:0}26.59%,100%{opacity:1}}.r1_1{animation:r1_1 24.65s linear infinite}
+@keyframes t1_1{0%,26.58%{transform:scaleX(0)}29.82%,100%{transform:scaleX(1)}}.t1_1{transform-box:fill-box;transform-origin:left;animation:t1_1 24.65s linear infinite}
+@keyframes r1_2{0%,29.82%{opacity:0}29.83%,100%{opacity:1}}.r1_2{animation:r1_2 24.65s linear infinite}
+@keyframes t1_2{0%,29.82%{transform:scaleX(0)}33.07%,100%{transform:scaleX(1)}}.t1_2{transform-box:fill-box;transform-origin:left;animation:t1_2 24.65s linear infinite}
+@keyframes r1_3{0%,34.49%{opacity:0}34.50%,100%{opacity:1}}.r1_3{animation:r1_3 24.65s linear infinite}
+@keyframes s2{0%,42.40%{opacity:0}43.41%,63.50%{opacity:1}64.51%,100%{opacity:0}}.s2{animation:s2 24.65s linear infinite}
+@keyframes r2_0{0%,43.41%{opacity:0}43.42%,100%{opacity:1}}.r2_0{animation:r2_0 24.65s linear infinite}
+@keyframes t2_0{0%,43.41%{transform:scaleX(0)}46.66%,100%{transform:scaleX(1)}}.t2_0{transform-box:fill-box;transform-origin:left;animation:t2_0 24.65s linear infinite}
+@keyframes r2_1{0%,46.66%{opacity:0}46.67%,100%{opacity:1}}.r2_1{animation:r2_1 24.65s linear infinite}
+@keyframes t2_1{0%,46.66%{transform:scaleX(0)}49.91%,100%{transform:scaleX(1)}}.t2_1{transform-box:fill-box;transform-origin:left;animation:t2_1 24.65s linear infinite}
+@keyframes r2_2{0%,49.91%{opacity:0}49.92%,100%{opacity:1}}.r2_2{animation:r2_2 24.65s linear infinite}
+@keyframes t2_2{0%,49.91%{transform:scaleX(0)}53.15%,100%{transform:scaleX(1)}}.t2_2{transform-box:fill-box;transform-origin:left;animation:t2_2 24.65s linear infinite}
+@keyframes r2_3{0%,54.57%{opacity:0}54.58%,100%{opacity:1}}.r2_3{animation:r2_3 24.65s linear infinite}
+@keyframes s3{0%,62.48%{opacity:0}63.50%,100%{opacity:1}}.s3{animation:s3 24.65s linear infinite}
+@keyframes r3_0{0%,63.50%{opacity:0}63.51%,100%{opacity:1}}.r3_0{animation:r3_0 24.65s linear infinite}
+@keyframes t3_0{0%,63.50%{transform:scaleX(0)}69.24%,100%{transform:scaleX(1)}}.t3_0{transform-box:fill-box;transform-origin:left;animation:t3_0 24.65s linear infinite}
+@keyframes r3_1{0%,70.66%{opacity:0}70.67%,100%{opacity:1}}.r3_1{animation:r3_1 24.65s linear infinite}
+@keyframes r3_2{0%,70.66%{opacity:0}70.67%,100%{opacity:1}}.r3_2{animation:r3_2 24.65s linear infinite}
+@keyframes r3_3{0%,70.66%{opacity:0}70.67%,100%{opacity:1}}.r3_3{animation:r3_3 24.65s linear infinite}
+@keyframes r3_4{0%,70.66%{opacity:0}70.67%,100%{opacity:1}}.r3_4{animation:r3_4 24.65s linear infinite}
+@keyframes r3_5{0%,70.66%{opacity:0}70.67%,100%{opacity:1}}.r3_5{animation:r3_5 24.65s linear infinite}
+@keyframes r3_6{0%,70.66%{opacity:0}70.67%,100%{opacity:1}}.r3_6{animation:r3_6 24.65s linear infinite}
+@keyframes r3_7{0%,73.90%{opacity:0}73.91%,100%{opacity:1}}.r3_7{animation:r3_7 24.65s linear infinite}
+@keyframes t3_7{0%,73.90%{transform:scaleX(0)}78.53%,100%{transform:scaleX(1)}}.t3_7{transform-box:fill-box;transform-origin:left;animation:t3_7 24.65s linear infinite}
+@keyframes r3_8{0%,78.53%{opacity:0}78.54%,100%{opacity:1}}.r3_8{animation:r3_8 24.65s linear infinite}
+@keyframes t3_8{0%,78.53%{transform:scaleX(0)}83.16%,100%{transform:scaleX(1)}}.t3_8{transform-box:fill-box;transform-origin:left;animation:t3_8 24.65s linear infinite}
+@keyframes r3_9{0%,84.58%{opacity:0}84.59%,100%{opacity:1}}.r3_9{animation:r3_9 24.65s linear infinite}
+@keyframes pg{0%{transform:scaleX(0)}100%{transform:scaleX(1)}}.pg{animation:pg 24.65s linear infinite}
+@media (prefers-reduced-motion: reduce){g,rect,circle{animation:none!important;opacity:1!important;transform:none!important}.scene{opacity:0!important}.scene.last{opacity:1!important}circle{fill:#2f81f7}}
+</style>
+<rect width="960" height="450" rx="14" fill="url(#bg)"/>
+<text x="24" y="34" class="kicker">OPENGEN TUTORIAL 3</text><text x="24" y="62" class="title">Use OpenGen from your app</text>
+<rect class="hl hlr" x="14" y="92" width="312" height="68" rx="12"/>
+<g class="l0"><circle class="d0" cx="38" cy="124" r="13"/><text x="38" y="128.5" text-anchor="middle" class="num">1</text>
+<text x="62" y="117" class="cap">Authenticate</text><text x="62" y="136" class="det">Every call carries the owner token</text><text x="62" y="152" class="det">from init.</text></g>
+<g class="l1"><circle class="d1" cx="38" cy="198" r="13"/><text x="38" y="202.5" text-anchor="middle" class="num">2</text>
+<text x="62" y="191" class="cap">Create over HTTP</text><text x="62" y="210" class="det">POST /v1/sandboxes with a project</text><text x="62" y="226" class="det">id.</text></g>
+<g class="l2"><circle class="d2" cx="38" cy="272" r="13"/><text x="38" y="276.5" text-anchor="middle" class="num">3</text>
+<text x="62" y="265" class="cap">Run a command over HTTP</text><text x="62" y="284" class="det">argv is an array, never a host</text><text x="62" y="300" class="det">shell.</text></g>
+<g class="l3"><circle class="d3" cx="38" cy="346" r="13"/><text x="38" y="350.5" text-anchor="middle" class="num">4</text>
+<text x="62" y="339" class="cap">Or use the JavaScript client</text><text x="62" y="358" class="det">Typed client for trusted backend</text><text x="62" y="374" class="det">code.</text></g>
+<rect x="352" y="86" width="590" height="262" rx="10" fill="#0d1117" stroke="#30363d"/>
+<rect x="352" y="86" width="590" height="30" rx="10" fill="#161b22"/><rect x="352" y="106" width="590" height="10" fill="#161b22"/>
+<circle cx="370" cy="101" r="5.5" fill="#ff5f57"/><circle cx="388" cy="101" r="5.5" fill="#febc2e"/><circle cx="406" cy="101" r="5.5" fill="#28c840"/>
+<text x="647" y="105" text-anchor="middle" class="bar">recorded OpenGen session</text>
+<g class="scene s0"><g class="r0_0"><clipPath id="c0_0"><rect class="t0_0" x="370" y="127" width="554.8" height="20"/></clipPath><text x="370" y="142" class="cmd" clip-path="url(#c0_0)"><tspan class="ps">$</tspan> H="Authorization: Bearer $(cat $OPENGEN_STATE_DIR/token)"; curl -s</text></g>
+<g class="r0_1"><clipPath id="c0_1"><rect class="t0_1" x="370" y="147" width="538.6" height="20"/></clipPath><text x="370" y="162" class="cmd" clip-path="url(#c0_1)">  -H "$H" $OPENGEN_URL/v1/health | jq -c '{ready: .runtime.ready}'</text></g>
+<g class="r0_2"><text x="370" y="182" class="out">{"ready":true}</text></g></g>
+<g class="scene s1"><g class="r1_0"><clipPath id="c1_0"><rect class="t1_0" x="370" y="127" width="498.09999999999997" height="20"/></clipPath><text x="370" y="142" class="cmd" clip-path="url(#c1_0)"><tspan class="ps">$</tspan> ID=$(curl -s -H "$H" -H "Content-Type: application/json" -d</text></g>
+<g class="r1_1"><clipPath id="c1_1"><rect class="t1_1" x="370" y="147" width="554.8" height="20"/></clipPath><text x="370" y="162" class="cmd" clip-path="url(#c1_1)">  '{"projectId":"api-demo"}' $OPENGEN_URL/v1/sandboxes | jq -r .id);</text></g>
+<g class="r1_2"><clipPath id="c1_2"><rect class="t1_2" x="370" y="167" width="85" height="20"/></clipPath><text x="370" y="182" class="cmd" clip-path="url(#c1_2)">  echo $ID</text></g>
+<g class="r1_3"><text x="370" y="202" class="out">d63eb459-12ca-45f9-ad64-d5b7ca67aa3b</text></g></g>
+<g class="scene s2"><g class="r2_0"><clipPath id="c2_0"><rect class="t2_0" x="370" y="127" width="457.59999999999997" height="20"/></clipPath><text x="370" y="142" class="cmd" clip-path="url(#c2_0)"><tspan class="ps">$</tspan> curl -s -H "$H" -H "Content-Type: application/json" -d</text></g>
+<g class="r2_1"><clipPath id="c2_1"><rect class="t2_1" x="370" y="147" width="449.5" height="20"/></clipPath><text x="370" y="162" class="cmd" clip-path="url(#c2_1)">  '{"projectId":"api-demo","argv":["node","-p","6*7"]}'</text></g>
+<g class="r2_2"><clipPath id="c2_2"><rect class="t2_2" x="370" y="167" width="530.5" height="20"/></clipPath><text x="370" y="182" class="cmd" clip-path="url(#c2_2)">  $OPENGEN_URL/v1/sandboxes/$ID/exec | jq -c '{exitCode, stdout}'</text></g>
+<g class="r2_3"><text x="370" y="202" class="out">{"exitCode":0,"stdout":"42\n"}</text></g></g>
+<g class="scene s3 last"><g class="r3_0"><clipPath id="c3_0"><rect class="t3_0" x="370" y="127" width="328" height="20"/></clipPath><text x="370" y="142" class="cmd" clip-path="url(#c3_0)"><tspan class="ps">$</tspan> sed -n 9,12p examples/local-client.mjs</text></g>
+<g class="r3_1"><text x="370" y="162" class="out">const sandbox = await client.create({ projectId });</text></g>
+<g class="r3_2"><text x="370" y="182" class="out">try {</text></g>
+<g class="r3_3"><text x="370" y="202" class="out">  await client.writeFile(sandbox.id, { projectId, path: 'hello.mjs',</text></g>
+<g class="r3_4"><text x="370" y="222" class="out">  content: 'console.log("Hello from OpenGen");\n' });</text></g>
+<g class="r3_5"><text x="370" y="242" class="out">  const result = await client.exec(sandbox.id, { projectId, argv:</text></g>
+<g class="r3_6"><text x="370" y="262" class="out">  ['node', 'hello.mjs'] });</text></g>
+<g class="r3_7"><clipPath id="c3_7"><rect class="t3_7" x="370" y="267" width="506.2" height="20"/></clipPath><text x="370" y="282" class="cmd" clip-path="url(#c3_7)"><tspan class="ps">$</tspan> node examples/local-client.mjs | jq -c '.result | {exitCode,</text></g>
+<g class="r3_8"><clipPath id="c3_8"><rect class="t3_8" x="370" y="287" width="85" height="20"/></clipPath><text x="370" y="302" class="cmd" clip-path="url(#c3_8)">  stdout}'</text></g>
+<g class="r3_9"><text x="370" y="322" class="out">{"exitCode":0,"stdout":"Hello from OpenGen\n"}</text></g></g>
+<rect x="24" y="428" width="912" height="5" rx="2.5" fill="#21262d"/><rect class="pg" x="24" y="428" width="912" height="5" rx="2.5" fill="url(#accent)"/>
+</svg>

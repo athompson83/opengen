@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="280" viewBox="0 0 960 280" role="img" aria-label="OpenGen: local sandboxes for AI agents and the apps that run them. An app sends commands over a loopback API to three locked, offline Docker sandboxes.">
+<title>OpenGen</title>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0a1020"/><stop offset=".55" stop-color="#0f1a33"/><stop offset="1" stop-color="#062a3a"/></linearGradient>
+  <linearGradient id="word" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#7ee0ff"/></linearGradient>
+  <linearGradient id="box" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b2a4a"/><stop offset="1" stop-color="#121c33"/></linearGradient>
+  <radialGradient id="glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#2f81f7" stop-opacity=".45"/><stop offset="1" stop-color="#2f81f7" stop-opacity="0"/></radialGradient>
+</defs>
+<style>
+text{font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif}
+.w{font-size:58px;font-weight:800;letter-spacing:-1.5px}.t{fill:#c9d4e3;font-size:17px}.chip{fill:#9fb3c8;font-size:12.5px;font-weight:600}
+.lbl{fill:#e6edf3;font-size:12px;font-weight:600}.sub{fill:#8b949e;font-size:10.5px}
+.pulse{animation:pulse 3.2s ease-in-out infinite;transform-origin:640px 140px}
+@keyframes pulse{0%,100%{opacity:.55;transform:scale(.92)}50%{opacity:1;transform:scale(1.05)}}
+.p1{animation:p1 3s linear infinite}.p2{animation:p2 3s linear infinite 1s}.p3{animation:p3 3s linear infinite 2s}
+@keyframes p1{0%{transform:translate(0,0);opacity:0}10%{opacity:1}80%{opacity:1}100%{transform:translate(124px,-62px);opacity:0}}
+@keyframes p2{0%{transform:translate(0,0);opacity:0}10%{opacity:1}80%{opacity:1}100%{transform:translate(124px,0);opacity:0}}
+@keyframes p3{0%{transform:translate(0,0);opacity:0}10%{opacity:1}80%{opacity:1}100%{transform:translate(124px,62px);opacity:0}}
+.b1,.b2,.b3{animation:bob 4s ease-in-out infinite}.b2{animation-delay:.6s}.b3{animation-delay:1.2s}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.cur{animation:blink 1.1s steps(1) infinite}@keyframes blink{50%{opacity:0}}
+@media (prefers-reduced-motion: reduce){*{animation:none!important}}
+</style>
+<rect width="960" height="280" rx="18" fill="url(#bg)"/>
+<g opacity=".18" stroke="#2f81f7" stroke-width=".6">
+  <path d="M520 0V280M580 0V280M640 0V280M700 0V280M760 0V280M820 0V280M880 0V280M940 0V280M500 40H960M500 100H960M500 160H960M500 220H960"/>
+</g>
+<text x="40" y="112" class="w" fill="url(#word)">OpenGen</text>
+<text x="42" y="148" class="t">Local sandboxes for AI agents and the apps that run them.</text>
+<g transform="translate(42 178)">
+  <rect width="128" height="28" rx="14" fill="#16233f" stroke="#2b3d63"/><text x="64" y="18.5" text-anchor="middle" class="chip">Docker isolation</text>
+  <rect x="138" width="118" height="28" rx="14" fill="#16233f" stroke="#2b3d63"/><text x="197" y="18.5" text-anchor="middle" class="chip">Loopback API</text>
+  <rect x="266" width="166" height="28" rx="14" fill="#16233f" stroke="#2b3d63"/><text x="349" y="18.5" text-anchor="middle" class="chip">No account · no API key</text>
+</g>
+<text x="42" y="240" class="sub" style="font-size:12.5px">Apache-2.0 · Node.js 24 · single-owner local runtime</text>
+
+<!-- Your app talks to OpenGen on 127.0.0.1; each sandbox is a locked, offline container. -->
+<circle cx="640" cy="140" r="70" fill="url(#glow)" class="pulse"/>
+<g transform="translate(552 108)">
+  <rect width="124" height="64" rx="12" fill="#0d1117" stroke="#3a4d74"/>
+  <text x="14" y="26" class="lbl">your app</text>
+  <text x="14" y="46" class="sub" font-family="ui-monospace,Menlo,Consolas,monospace">$ opengen exec<tspan class="cur">▍</tspan></text>
+</g>
+<path d="M676 140 C720 140 720 78 800 78" fill="none" stroke="#2f81f7" stroke-opacity=".45" stroke-width="1.6" stroke-dasharray="4 5"/>
+<path d="M676 140 H800" fill="none" stroke="#2f81f7" stroke-opacity=".45" stroke-width="1.6" stroke-dasharray="4 5"/>
+<path d="M676 140 C720 140 720 202 800 202" fill="none" stroke="#2f81f7" stroke-opacity=".45" stroke-width="1.6" stroke-dasharray="4 5"/>
+<circle cx="676" cy="140" r="4" fill="#7ee0ff" class="p1"/><circle cx="676" cy="140" r="4" fill="#7ee0ff" class="p2"/><circle cx="676" cy="140" r="4" fill="#7ee0ff" class="p3"/>
+<g class="b1"><g transform="translate(800 54)"><rect width="140" height="48" rx="10" fill="url(#box)" stroke="#3a4d74"/><text x="38" y="21" class="lbl">sandbox</text><text x="38" y="36" class="sub">offline · non-root</text>
+  <rect x="12" y="15" width="16" height="14" rx="3" fill="#3fb950"/><path d="M15 15v-3a5 5 0 0 1 10 0v3" fill="none" stroke="#3fb950" stroke-width="2"/></g></g>
+<g class="b2"><g transform="translate(800 116)"><rect width="140" height="48" rx="10" fill="url(#box)" stroke="#3a4d74"/><text x="38" y="21" class="lbl">sandbox</text><text x="38" y="36" class="sub">read-only root</text>
+  <rect x="12" y="15" width="16" height="14" rx="3" fill="#3fb950"/><path d="M15 15v-3a5 5 0 0 1 10 0v3" fill="none" stroke="#3fb950" stroke-width="2"/></g></g>
+<g class="b3"><g transform="translate(800 178)"><rect width="140" height="48" rx="10" fill="url(#box)" stroke="#3a4d74"/><text x="38" y="21" class="lbl">sandbox</text><text x="38" y="36" class="sub">CPU · memory limits</text>
+  <rect x="12" y="15" width="16" height="14" rx="3" fill="#3fb950"/><path d="M15 15v-3a5 5 0 0 1 10 0v3" fill="none" stroke="#3fb950" stroke-width="2"/></g></g>
+<text x="760" y="262" text-anchor="middle" class="sub">127.0.0.1 · owner token on every call</text>
+</svg>
