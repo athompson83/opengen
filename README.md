@@ -19,6 +19,7 @@
   <a href="#tutorials">Tutorials</a> ·
   <a href="#features">Features</a> ·
   <a href="#screenshots">Screenshots</a> ·
+  <a href="#the-genisys-app">Genisys app tutorials</a> ·
   <a href="#connections">Connections</a> ·
   <a href="#contributing">Contributing</a>
 </p>
@@ -34,7 +35,8 @@ runtime**: it is not an audited security product, a microVM runtime or a shared 
 
 Every terminal recording and tutorial on this page is a real session against a local Docker daemon, captured by
 [`npm run readme:record`](scripts/record-readme.mjs). Nothing in them is typed by hand. The screenshots were taken
-from real sessions on October 26, 2026.
+from real sessions on October 26, 2026. The [Genisys app tutorials](#the-genisys-app) are recorded from the real
+Genisys desktop build.
 
 ## Quick start
 
@@ -255,6 +257,194 @@ remote-device connectivity; a client application builds those on the runtime. Th
 <td width="50%" valign="top">
   <img src="docs/assets/readme/screenshots/genisys-opengen-guide.png" alt="The OpenGen page of the Genisys developer guide, explaining that OpenGen is a separate Apache-2.0 product and listing the setup commands" width="100%" />
   <p><b>The Genisys developer guide.</b> Setup steps for connecting OpenGen to the Genisys desktop Developer Console, an optional separate app.</p>
+</td>
+</tr>
+</table>
+
+## The Genisys app
+
+<p align="center">
+  <img src="docs/assets/readme/genisys/workspace.gif" alt="Typing a request to Zeus in the Genisys Workspace and getting back a launch plan with milestones, owners and due dates" width="960" />
+</p>
+
+[Genisys](https://genisys.aroqon.com/) is a separate desktop app for running projects with a team of AI agents; it is one of the
+client applications that can use OpenGen. OpenGen does not need it. These tutorials are recorded from the real Genisys
+desktop build with a demo profile (a made-up coffee brand, synthetic tasks and a local stand-in model with a fixed reply),
+so nothing in them touches a real account.
+
+### 1. Set up Genisys
+
+<table>
+<tr>
+<td width="62%" valign="top"><img src="docs/assets/readme/genisys/setup.gif" alt="Walking through the three setup steps: your way, your apps and connections" width="100%" /></td>
+<td width="38%" valign="top">
+  <ol>
+    <li>Open Genisys. Setup asks what you would like to do first; pick one and press <b>Continue</b>.</li>
+    <li><b>Your apps</b> lists the supported creative, media and Office apps already on this PC.</li>
+    <li><b>Connections</b> suggests services and asks how agents get AI: free models, your own keys or a Genisys account.</li>
+    <li>Choose <b>Set up AI</b>, or <b>Do this later</b>. Nothing connects until you choose it.</li>
+  </ol>
+</td>
+</tr>
+</table>
+
+### 2. Start a project
+
+<table>
+<tr>
+<td width="62%" valign="top"><img src="docs/assets/readme/genisys/projects.gif" alt="Starring a project, opening New Project's starting points, then the project's task board" width="100%" /></td>
+<td width="38%" valign="top">
+  <ol>
+    <li>In <b>Projects</b>, star the work you come back to and file projects into folders.</li>
+    <li><b>New Project</b> offers starting points: build and launch an app, start a business, explore an idea, design something, make a presentation, or manage what already exists.</li>
+    <li>Open a project to see its task board: To do, Doing, Review and Done, each task with its agent or person.</li>
+  </ol>
+</td>
+</tr>
+</table>
+
+### 3. Track work in a table
+
+<table>
+<tr>
+<td width="62%" valign="top"><img src="docs/assets/readme/genisys/tables.gif" alt="A content calendar table switching to board and dashboard views" width="100%" /></td>
+<td width="38%" valign="top">
+  <ol>
+    <li>Open the project's <b>Tables</b> tab. Columns are typed: status, tags, people and agents, dates, numbers and calculations.</li>
+    <li>Switch to <b>Board</b> to see rows as cards in a lane per status; drag a card or use its menu to move it.</li>
+    <li>Switch to <b>Dashboard</b> for charts suggested from the table's columns.</li>
+  </ol>
+</td>
+</tr>
+</table>
+
+### 4. See what's coming up
+
+<table>
+<tr>
+<td width="62%" valign="top"><img src="docs/assets/readme/genisys/calendar.gif" alt="Selecting days in the month calendar with the mouse and arrow keys, moving to the next month and back, then switching to the week view" width="100%" /></td>
+<td width="38%" valign="top">
+  <ol>
+    <li>Open <b>Dashboard</b> and pick a project. <b>Calendar &amp; agenda</b> shows tasks, milestones, scheduled automations and planned campaign ads.</li>
+    <li>Click a day, or move with the arrow keys, to list that day's items beside the month; <b>Open</b> takes you to the item.</li>
+    <li>Use the arrows and <b>Today</b> to change month, and <b>Week</b> or <b>List</b> for other views. The coloured chips filter by kind.</li>
+  </ol>
+</td>
+</tr>
+</table>
+
+### 5. Ask your agents
+
+<table>
+<tr>
+<td width="62%" valign="top"><img src="docs/assets/readme/genisys/workspace.gif" alt="Typing a request to Zeus in Workspace and getting back a launch plan with milestones, owners and due dates" width="100%" /></td>
+<td width="38%" valign="top">
+  <ol>
+    <li>From a project, choose <b>Open in Workspace</b>. Your agents are on the left and the project's outputs on the right.</li>
+    <li>Tell Zeus the result you want. Zeus plans the work and brings in teammates.</li>
+    <li>The answer waits for your review: accept it or ask for a revision. Nothing is published or paid for until you approve it.</li>
+  </ol>
+</td>
+</tr>
+</table>
+
+### 6. Build an automation from a template
+
+<table>
+<tr>
+<td width="62%" valign="top"><img src="docs/assets/readme/genisys/automations.gif" alt="Opening the template list, loading a marketing campaign workflow onto the canvas, then the step list" width="100%" /></td>
+<td width="38%" valign="top">
+  <ol>
+    <li>Open the project's <b>Automations</b> app and press <b>+</b> for a new automation.</li>
+    <li>Open <b>Start from a template</b> and pick one, such as inbox triage, a support desk or a marketing campaign.</li>
+    <li>The canvas shows its trigger and steps; <b>Simple list</b> shows the same steps in order.</li>
+    <li><b>Create draft</b>, then test it and activate it yourself.</li>
+  </ol>
+</td>
+</tr>
+</table>
+
+### 7. Edit a photo
+
+<table>
+<tr>
+<td width="62%" valign="top"><img src="docs/assets/readme/genisys/photo-editor.gif" alt="Applying a warm look and adding a caption to a product photo" width="100%" /></td>
+<td width="38%" valign="top">
+  <ol>
+    <li>In the project's outputs, choose an image and press <b>Edit</b>.</li>
+    <li>Pick a look, adjust light and colour, crop or turn it, and add a caption.</li>
+    <li><b>Save version</b> keeps the original and adds the edit as a new version. Editing happens on this PC.</li>
+  </ol>
+</td>
+</tr>
+</table>
+
+### 8. Reframe a video
+
+<table>
+<tr>
+<td width="62%" valign="top"><img src="docs/assets/readme/genisys/video-editor.gif" alt="Reframing a promo clip from its original size to portrait and square" width="100%" /></td>
+<td width="38%" valign="top">
+  <ol>
+    <li>Open the project's <b>Video editing</b> app, choose a clip and press <b>Edit</b>.</li>
+    <li>Pick a frame: portrait 9:16 for stories and reels, square 1:1 or landscape 16:9.</li>
+    <li>Trim, add captions, remove sound or change size and format, then <b>Save version</b>.</li>
+  </ol>
+</td>
+</tr>
+</table>
+
+### More of the interface
+
+<table>
+<tr>
+<td width="50%" valign="top">
+  <img src="docs/assets/readme/genisys/workspace.png" alt="Agents on the left, the conversation with Zeus in the middle and the project's outputs on the right" width="100%" />
+  <p><b>Workspace.</b></p>
+</td>
+<td width="50%" valign="top">
+  <img src="docs/assets/readme/genisys/projects.png" alt="Projects grid with folders, starred and recent filters" width="100%" />
+  <p><b>Projects and folders.</b></p>
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+  <img src="docs/assets/readme/genisys/project-board.png" alt="Project task board with To do, Doing, Review and Done columns and an agent on each task" width="100%" />
+  <p><b>Task board.</b></p>
+</td>
+<td width="50%" valign="top">
+  <img src="docs/assets/readme/genisys/tables.png" alt="Content calendar table with status, channel tags, owner, publish date and budget columns" width="100%" />
+  <p><b>Tables.</b></p>
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+  <img src="docs/assets/readme/genisys/table-board.png" alt="The same table as a board, one lane per status" width="100%" />
+  <p><b>Table as a board.</b></p>
+</td>
+<td width="50%" valign="top">
+  <img src="docs/assets/readme/genisys/calendar.png" alt="Month calendar with tasks on their days and the selected day's items beside it" width="100%" />
+  <p><b>Calendar &amp; agenda.</b></p>
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+  <img src="docs/assets/readme/genisys/dashboard.png" alt="Dashboard overview: what needs you, getting started and your agents" width="100%" />
+  <p><b>Dashboard.</b></p>
+</td>
+<td width="50%" valign="top">
+  <img src="docs/assets/readme/genisys/automation-canvas.png" alt="A marketing campaign workflow on the canvas: schedule, agent steps, a condition and an approval" width="100%" />
+  <p><b>Automation canvas.</b></p>
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+  <img src="docs/assets/readme/genisys/photo-editor.png" alt="Photo editor with crop, looks, light and colour, text and size controls" width="100%" />
+  <p><b>Photo editor.</b></p>
+</td>
+<td width="50%" valign="top">
+  <img src="docs/assets/readme/genisys/video-editor.png" alt="Video editor with framing, captions, sound, size, turn and format controls" width="100%" />
+  <p><b>Video editor.</b></p>
 </td>
 </tr>
 </table>

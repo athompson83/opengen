@@ -16,6 +16,7 @@ external executables, actions, container contents, or model services.
 | Docker Engine / CLI | Operator-supplied container execution; [Docker documentation](https://docs.docker.com/engine/) | Installed separately; OpenGen does not redistribute Docker Desktop or Docker Sandboxes |
 | Simple Icons 16.36.0 | Brand glyphs for Docker, Linux, Node.js, Debian, JavaScript, TypeScript, curl, npm and GitHub Actions in `docs/assets/logos/`, placed on white tiles; [simple-icons/simple-icons](https://github.com/simple-icons/simple-icons) | Icon data CC0-1.0; the marks remain trademarks of their owners and are used only to identify compatible software |
 | Genisys symbol | `docs/assets/logos/genisys.svg`, supplied by the Genisys owner, who also owns this repository | Identifies the optional Genisys client; not licensed for other use |
+| Genisys app screenshots and GIFs | `docs/assets/readme/genisys/`, recorded from the Genisys desktop build by `scripts/capture-readme-media.mjs` in the Genisys repository at commit `d7bce875` with a synthetic demo profile; owned by the Genisys owner, who also owns this repository | Shows the optional Genisys client; not licensed for other use |
 | GitHub checkout and setup-node actions | CI only; official `actions` repositories | Each action retains its upstream license; full commits pinned in the workflow |
 
 ## Pins checked for this setup
